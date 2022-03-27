@@ -19,11 +19,8 @@ def get_content(html):
 
     text = ""
     for item in items:
-        text += (item.get_text() + '\n')
-        print(item.get_text())
-    
+        text += (item.get_text() + '\n')    
     return text
-    # print(items)
 
 
 def parse(URL):
