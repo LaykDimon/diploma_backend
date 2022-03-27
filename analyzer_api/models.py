@@ -16,12 +16,10 @@ class UserText(Trackable):
     analyzeResult = models.ForeignKey('AnalyzeResult', on_delete=models.CASCADE)
 
 class AnalyzeResult(models.Model):
-    words_number = models.IntegerField()
-    words_number_with_spaces = models.IntegerField()
-    words_number_without_spaces = models.IntegerField()
-    letters_amount = models.IntegerField()
-    foreign_words_amount = models.IntegerField()
-    punctuation_marks = models.IntegerField()
+    symbol_count = models.IntegerField()
+    symbol_count_without_punct = models.IntegerField()
+    word_count = models.IntegerField()
+    sentence_count = models.IntegerField()
+    water_content = models.FloatField()
     classic_nausea = models.FloatField()
     academic_nausea = models.FloatField()
-    water_percentage = models.FloatField()
