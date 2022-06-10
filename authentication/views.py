@@ -2,7 +2,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from authentication.serializers import UserRegisterSerializer, LogoutSerializer, ProfileSerializer
+from authentication.serializers import UserRegisterSerializer, LogoutSerializer, ProfileSerializer, CustomTokenObtainPairSerializer
 from authentication.services.auth import move_refresh_token_to_blacklist
 from authentication.services.querysets import CustomUserQueryset
 
@@ -22,9 +22,9 @@ class RegisterUser(generics.GenericAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class CustomTokenObtainPairView(TokenObtainPairView):
-#     # Replace the serializer with your custom
-#     serializer_class = CustomTokenObtainPairSerializer
+class CustomTokenObtainPairView(TokenObtainPairView):
+    # Replace the serializer with your custom
+    serializer_class = CustomTokenObtainPairSerializer
 
 
 class Logout(generics.GenericAPIView):

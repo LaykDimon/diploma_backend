@@ -32,21 +32,21 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 # maybe needed
-# class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
-#     def validate(self, attrs):
-#         data = super().validate(attrs)
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-#         refresh = self.get_token(self.user)
+        refresh = self.get_token(self.user)
 
-#         data['refresh'] = str(refresh)
-#         data['access'] = str(refresh.access_token)
-#         data['user'] = ProfileSerializer(self.user).data
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['user'] = ProfileSerializer(self.user).data
 
-#         if api_settings.UPDATE_LAST_LOGIN:
-#             update_last_login(None, self.user)
+        if api_settings.UPDATE_LAST_LOGIN:
+            update_last_login(None, self.user)
 
-#         return data
+        return data
 
 
 class LogoutSerializer(serializers.Serializer):

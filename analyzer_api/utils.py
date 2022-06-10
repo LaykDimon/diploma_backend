@@ -32,6 +32,8 @@ def get_analyze_results(text):
 
     analyze_results["word_count"] = get_word_count(nlp_doc)
 
+    analyze_results["lemmatized_word_count"] = get_lemmatized_word_count(lemmatized_nlp_doc)
+
     analyze_results["sentence_count"] = get_sentence_count(nlp_doc)
 
     analyze_results["water_content"] = get_water_content(nlp_doc)
@@ -39,6 +41,8 @@ def get_analyze_results(text):
     analyze_results["classic_nausea"] = get_classic_nausea(lemmatized_nlp_doc)
 
     analyze_results["academic_nausea"] = get_academic_nausea(nlp_doc)
+
+    analyze_results["words"] = get_text_words(lemmatized_nlp_doc)
 
     return analyze_results
     
@@ -55,6 +59,10 @@ def get_word_count(nlp_document):
     word_count = len([token.text for token in nlp_document if token.is_punct != True])
     return word_count
 
+def get_lemmatized_word_count(nlp_document):
+    lemmatized_word_count = len(nlp_document)
+    return lemmatized_word_count
+
 def get_sentence_count(nlp_document):
     sentence_count = len([sent.text for sent in nlp_document.sents])
     return sentence_count
@@ -62,14 +70,14 @@ def get_sentence_count(nlp_document):
 def get_water_content(nlp_document):
     water_word_amount = len([token for token in nlp_document if token.is_stop])
     water_content = round(water_word_amount / get_word_count(nlp_document) * 100, 2)
-    print(water_word_amount)
+    #print(water_word_amount)
     return water_content
 
 def get_classic_nausea(nlp_document):
     word_frequency = Counter(nlp_document)
     most_common_word = word_frequency.most_common(1)
     classic_nausea = round(math.sqrt(most_common_word[0][1]), 2)
-    print(most_common_word)
+    #print(most_common_word)
     return classic_nausea
 
 def get_academic_nausea(nlp_document):
@@ -77,6 +85,16 @@ def get_academic_nausea(nlp_document):
     lemmatized_nlp_doc = [element for element in lemmatized_nlp_doc if element.strip()]
     word_frequency = Counter(lemmatized_nlp_doc)
     most_common_word = word_frequency.most_common(1)
-    print(word_frequency.most_common(50 ))
+    #print(word_frequency.most_common(50 ))
     academic_nausea = round(most_common_word[0][1] / get_word_count(nlp_document) * 100, 2)
     return academic_nausea
+
+def get_text_words(nlp_document):
+    word_frequency = Counter(nlp_document)
+    most_common_words = word_frequency.most_common()
+    print(most_common_words)
+    return most_common_words
+
+
+# def show_recommendations(analyze_results):
+#     if()
